@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="lib/font-fontawesome-ae333ffef2.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paypal</title>
+    <link rel="stylesheet" href="public/css.css">
+    <link rel="stylesheet" href="./lib/bootstrap.css">
+    <script src="./lib/bootstrap.css"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="./lib/font-fontawesome-ae333ffef2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid ">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="img/tải xuống.png" alt="Logo website" width="70">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="index.html">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Liên hệ</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Sản phẩm
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Tất cả</a></li>
+                                    <li><a class="dropdown-item" href="#">Iphone</a></li>
+                                    <li><a class="dropdown-item" href="#">Samsung</a></li>
+                                    <li><a class="dropdown-item" href="#">Xiaomi</a></li>
+                                    <li><a class="dropdown-item" href="#">Oppo</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ms-auto">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div class="pt-2 pe-3">
+                        <button class="btn position-relative pt-2 pe-3">
+                            <a href="cart.html"><i class="fas fa-shopping-cart fa-2x text-dark"></i></a>
+                            <span class="badge bg-light text-danger rounded-pill position-absolute top-0 end-0">2</span>
+                        </button>
+                    </div>
+                    <div class="ms-2">
+                        <button class="btn">
+                            <a href="login.html"><i class="fas fa-user fa-2x text-dark"></i></a>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <h2>Giỏ hàng</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h4 class="mb-4">Thông tin thanh toán</h4>
+        <form>
+            <div class="form-group">
+                <label for="fullName">Họ và tên</label>
+                <input type="text" class="form-control" id="fullName" placeholder="Nhập họ và tên">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Nhập email">
+            </div>
+            <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="city">Thành phố</label>
+                    <input type="text" class="form-control" id="city" placeholder="Nhập thành phố">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="zip">Số điện thoại</label>
+                    <input type="text" class="form-control" id="zip" placeholder="Nhập số điện thoại">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cardNumber">Số thẻ</label>
+                <input type="text" class="form-control" id="cardNumber" placeholder="Nhập số thẻ">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="expDate">Ngày hết hạn</label>
+                    <input type="text" class="form-control" id="expDate" placeholder="MM/YY">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="cvv">CVV</label>
+                    <input type="text" class="form-control" id="cvv" placeholder="Nhập CVV">
+                </div>
+            </div>
+
+            <!-- Thông tin sản phẩm -->
+            <h4 class="mt-5 mb-3">Thông tin sản phẩm</h4>
+            <div class="form-group">
+                <label for="productName">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
+            </div>
+            <div class="form-group">
+                <label for="productImage">Hình ảnh</label>
+                <input type="file" class="form-control-file" id="productImage">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="productPrice">Giá tiền</label>
+                    <input type="text" class="form-control" id="productPrice"
+                        placeholder="Giá tự động tính sau khi nhập thông tin sản phẩm">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="productQuantity">Số lượng</label>
+                    <input type="number" class="form-control" id="productQuantity" placeholder="Nhập số lượng">
+                </div>
+            </div>
+
+            <a href="thanks.html" class="btn btn-primary">Thanh toán</a>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-LcBfIJlwITOkdlkawzx6TgbdVuZ4fxxaLLoNJgwGyltDIvZOGSS6+rpqX4shXcXH"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk5PLFY28Jwrg5M0+//Pk9Btw6OalxXgion"
+        crossorigin="anonymous"></script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-row">
+                <div class="footer-column">
+                    <h3 class="footer-heading">VietNam History</h3>
+                    <a href="">Điện thoại: 0352223905</a>
+                    <a href="">Email: giapnvph34346@fpt.edu.vn</a>
+                    <a href="">Cao đẳng FPT Phố Trịnh Văn Bô, Phường Phương Canh, Quận Từ Liêm, Hà Nội</a>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Về chúng tôi</h3>
+                    <a href="">Giới thiệu</a>
+                    <a href="">Liên hệ</a>
+                    <a href="">Điều khoản</a>
+                    <a href="">Bảo mật</a>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Liên hệ với chúng tôi</h3>
+                    <a href="">
+                        <i class="fa-brands fa-square-facebook"></i>
+                        Facebook
+                    </a>
+                    <a href="">
+                        <i class="fa-brands fa-youtube"></i>
+                        Youtube
+                    </a>
+                    <a href="">
+                        <i class="fa-solid fa-envelope"></i>
+                        Gmail
+                    </a>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Nhận thông báo</h3>
+                    <div>
+                        <input class="footer-input" placeholder="Enter your email">
+                        <button class="footer-btn">Gửi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    </footer>
+</body>
+
+</html>

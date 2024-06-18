@@ -1,0 +1,271 @@
+.product-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.product-card h4 {
+  margin-bottom: 5px;
+}
+
+.product-card p {
+  margin-bottom: 10px;
+}
+
+.btn-add-to-cart {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+
+.btn-add-to-cart:hover {
+  background-color: #0056b3;
+}
+
+.banner img {
+  max-width: 100%;
+  height: auto;
+}
+
+.login-form {
+  margin-top: 100px;
+  padding: 40px 10px;
+  width: 496px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1px solid #E6E8EC;
+  box-shadow: 0px 20px 60px -6px rgba(40, 40, 40, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-left: 430px;
+}
+.thankyou-message {
+  text-align: center; /* Căn giữa nội dung */
+}
+
+.sidebar-categories_menu ul {
+  list-style-type: none;
+  
+  padding: 0;
+  margin: 0;
+
+}
+
+.sidebar-categories_menu ul li {
+  margin-bottom: 10px;
+
+}
+
+.sidebar-categories_menu ul li a {
+  color: #333;
+  font-size: 16px;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.sidebar-categories_menu ul li a:hover {
+  background-color: #f0f0f0;
+}
+.product-link {
+  text-decoration: none;
+  color: black;
+}
+
+.product-link:hover {
+  text-decoration: underline;
+}
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px; /* Giả sử bạn muốn giới hạn chiều rộng của nội dung */
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.order-item {
+  text-align: center; 
+  list-style-type: none;
+  margin-bottom: 20px;
+  
+}
+.cancel-button {
+  
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+h1 {
+  text-align: center; 
+  
+}
+.form-heading {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 45px;
+  color: var(#23262F);
+}
+
+.form-desc {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  color: #777E90;
+}
+
+.text-link {
+  color: #3B71FE;
+  text-decoration: none;
+}
+
+.form-control {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control label {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.form-control input {
+  padding: 12px 20px;
+  border-radius: 6px;
+  border: 1px solid #B1B5C3;
+}
+
+.form-text {
+  width: 100%;
+  text-align: right;
+  margin-right: 100px;
+  text-decoration: none;
+  color: #3B71FE;
+}
+
+.form-btn {
+  width: 376px;
+  padding: 12px 30px;
+  border-radius: 10px;
+  background: #3B71FE;
+  color: #fff;
+}
+
+.form-btn:hover {
+  opacity: 0.8;
+  transition: 0.3s linear;
+}
+
+.footer {
+  margin-top: 100px;
+  padding: 68px 0 40px 0;
+  background-color: #181821;
+  color: #a9b3bb;
+  overflow: hidden;
+}
+
+.footer-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.footer-column {
+  width: 280px;
+  padding: 12px;
+}
+
+.footer-heading {
+  text-transform: uppercase;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+}
+
+.footer-column a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 2.2;
+}
+
+.footer-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.footer-btn {
+  padding: 8px 18px;
+  background-color: #fff;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.product-pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.product-pagination nav {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.paypal {
+  margin-top: 50px;
+
+}
+
+.product-thumbnail {
+  max-width: 100px;
+}
