@@ -1,15 +1,34 @@
+<?php
+$id_bill = isset($_GET['id_bill']) ? (int)$_GET['id_bill'] : 0;
+?>
 
+<div class="container my-5 py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7 text-center bg-white p-5 rounded shadow-sm border">
+            <div class="mb-4">
+                <i class="fa-solid fa-circle-check fa-5x text-success"></i>
+            </div>
+            <h2 class="fw-bold text-dark mb-2">Đặt hàng thành công!</h2>
+            <p class="text-muted fs-5 mb-4">Cảm ơn bạn đã tin tưởng và mua sắm tại <strong>8 Football Store</strong>.</p>
+            
+            <?php if ($id_bill > 0): ?>
+                <div class="alert alert-light border py-3 mb-4">
+                    <span>Mã đơn hàng của bạn: <strong class="text-primary fs-5">#<?= $id_bill ?></strong></span>
+                </div>
+            <?php endif; ?>
 
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-md-6 text-center">
-      <i class="fas fa-check-circle fa-5x text-success mb-3"></i>
-      <h2>Đặt hàng thành công!</h2>
-      <p>Cảm ơn bạn đã mua hàng của chúng tôi.</p>
+            <p class="small text-muted mb-4">Chúng tôi sẽ sớm liên hệ để xác nhận và tiến hành giao hàng cho bạn trong thời gian sớm nhất.</p>
+
+            <div class="d-flex justify-content-center gap-3">
+                <?php if ($id_bill > 0): ?>
+                    <a href="?act=view-bill&id_bill=<?= $id_bill ?>" class="btn btn-outline-primary px-4 py-2">
+                        <i class="fa-solid fa-receipt me-1"></i> Xem chi tiết đơn hàng
+                    </a>
+                <?php endif; ?>
+                <a href="index.php" class="btn btn-primary px-4 py-2">
+                    <i class="fa-solid fa-house me-1"></i> Về trang chủ
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="d-flex justify-content-center">
-        <button class="btn btn-danger me-4"><a href="?act=view-bill&id_bill=<?=$_GET['id_bill']?>" class="text-white" style="text-decoration: none;">Xem đơn hàng</a></button> 
-        <button class="btn btn-primary"><a href="index.php" class="text-white" style="text-decoration: none;">Trang chủ</a></button>
-    </div>
-  </div>
 </div>

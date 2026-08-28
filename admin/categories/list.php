@@ -1,32 +1,53 @@
-<table class="table mt-4">
-<br>
-     <br>
-     <h2 class="text-center text-primary mt-3">Danh sách nhãn hàng</h2>
-     <thead>
-     <tr>
-          <th scope="col">#</th>   
-          <th scope="col">Tên nhãn hàng</th>
-          <th scope="col">Action</th>
-     </tr>
-     </thead>
-     <tbody>
-     <tr>
-         <?php
-         require_once '../model/category.php';
-         $listCat = loadAll();
-         foreach($listCat as $cat){ 
-            $suacate = "index.php?act=update-category&id_dm=".$cat['id_dm'];
-            $xoacate = "index.php?act=delete-category&id_dm=".$cat['id_dm'];
-            ?>
-            <tr> <td scope="row"> <?=$cat['id_dm']?> </td>
-              <td scope="row"><?=$cat['name_dm']?></td>
-              <td>
-              <a href="<?=$suacate?>"><button type="button" class="btn btn-warning" name="edit-category"><i class="fa-solid fa-pen"></i> </button></a>
-              <a href="<?=$xoacate?>"><button type="button" class="btn btn-danger" name="deletecate" onclick="return confirm('Những sản phẩm trong danh mục này cũng sẽ bị xóa, xác nhận ?')"> <i class="fa-solid fa-trash"></i> </button></a>
-              <a href="index.php?act=add-product-with-cat&id_dm=<?=$cat['id_dm']?>" class="btn btn-primary"> <i class="fa-solid fa-plus"></i> Thêm sản phẩm</a>
-            </td> </tr>
-         <?php  } ?>
-     
-     </tbody>
-</table>
-<a href="index.php?act=add-category" class="btn btn-primary"> <i class="fa-solid fa-plus"></i> Thêm nhãn hàng</a>
+<?php
+$listCat = loadAll();
+?>
+
+<div class="container-fluid mt-4">
+    <h2 class="text-center text-primary mb-4">Danh sách nhãn hàng / Danh mục</h2>
+    
+    <div class="d-flex justify-content-end mb-3">
+        <a href="index.php?act=add-category" class="btn btn-success">
+            <i class="fa-solid fa-plus"></i> Thêm nhãn hàng mới
+        </a>
+    </div>
+
+    <div class="table-responsive bg-white rounded shadow-sm p-3">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col" style="width: 80px;">#</th>   
+                    <th scope="col">Tên nhãn hàng / Danh mục</th>
+                    <th scope="col" style="width: 250px;" class="text-center">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($listCat)): ?>
+                    <?php foreach($listCat as $cat): 
+                        $suacate = "index.php?act=update-category&id_dm=" . $cat['id_dm'];
+                        $xoacate = "index.php?act=delete-category&id_dm=" . $cat['id_dm'];
+                    ?>
+                    <tr>
+                        <td><strong>#<?=$cat['id_dm']?></strong></td>
+                        <td><span class="fw-bold text-dark"><?=htmlspecialchars($cat['name_dm'])?></span></td>
+                        <td class="text-center">
+                            <a href="<?=$suacate?>" class="btn btn-sm btn-warning me-1" title="Sửa danh mục">
+                                <i class="fa-solid fa-pen"></i> Sửa
+                            </a>
+                            <a href="<?=$xoacate?>" class="btn btn-sm btn-danger me-1" onclick="return confirm('Những sản phẩm thuộc danh mục này cũng có thể bị ảnh hưởng. Bạn có chắc chắn muốn xóa?')" title="Xóa danh mục">
+                                <i class="fa-solid fa-trash"></i> Xóa
+                            </a>
+                            <a href="index.php?act=add-product&id_dm=<?=$cat['id_dm']?>" class="btn btn-sm btn-primary" title="Thêm sản phẩm vào danh mục này">
+                                <i class="fa-solid fa-plus"></i> SP
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="3" class="text-center text-muted py-4">Chưa có danh mục nào.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

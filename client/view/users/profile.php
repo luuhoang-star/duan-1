@@ -1,86 +1,93 @@
+<?php
+if (empty($_SESSION['user'])) {
+    header('Location: ?act=login');
+    exit();
+}
 
-<main class="main" style="min-height:150vh;">
-    <div class="container">
-        <div class="profile">
-            <div class="profile-main">
-                <div class="options">
-                    <h2 class="option-heading">Cài Đặt</h2>
-                    <ul class="option-sidebar">
-                        <li class="active">
-                            <i class="fa-solid fa-user"></i>
-                            <a href="">Cài đặt tài khoản</a>
-                        </li>
-                      
-                        <li>
-                            <i class="fa-solid fa-shield-halved"></i>
-                            <a href="">Đăng nhập và bảo mật</a>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-bell"></i>
-                            <a href="">Cài đặt thông báo</a>
-                        </li>
-                    </ul>
+$user = $_SESSION['user'];
+$avatar = !empty($user['avatar']) ? $user['avatar'] : 'user.png';
+?>
+
+<div class="container my-5">
+    <div class="row g-4">
+        <!-- Sidebar tài khoản -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 text-center p-4 bg-white rounded-3">
+                <div class="mb-3">
+                    <img src="../img/<?=$avatar?>" alt="Avatar" class="rounded-circle img-thumbnail" style="width: 120px; height: 120px; object-fit: cover;">
                 </div>
-                <div class="profile-info">
-                    <h2 class="profile-heading">Thông tin cá nhân</h2>
-                    <form action="?act=update-profile" method="POST" enctype="multipart/form-data">
-                        <div class="info-list">
-                            <div class="info-item">
-                                <h2 class="info-heading">Họ và tên</h2>
-                                <input type="text" name="name_user" value="<?php echo $_SESSION['user']['name_user']; ?>" />
-                                <span>Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của bạn.</span>
-                            </div>
-
-                            <div class="info-item">
-                                <h2 class="info-heading">Avatar</h2>
-                                <input name="avatar" type="file" />
-                                <img src="<?php echo $_SESSION['user']['avatar']; ?>" alt="avatar user" />
-                                <span class="text-danger">Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.</span>
-                            </div>
-
-                            <div class="info-item">
-                                <h2 class="info-heading">Email</h2>
-                                <input name="email" type="email" value="<?php echo $_SESSION['user']['email']; ?>" />
-                            </div>
-
-                            <div class="info-item">
-                                <h2 class="info-heading">Số Điện Thoại</h2>
-                                <input type="text" name="sdt" value="<?php echo $_SESSION['user']['sdt']; ?>" placeholder="Nhập số điện thoại" />
-                                <span>Điện thoại liên kết với VietNamHistory</span>
-                            </div>
-                            <div class="info-item">
-                                <h2 class="info-heading">Địa chỉ</h2>
-                                <input name="diachi" type="diachi" value="<?php echo $_SESSION['user']['diachi']; ?>" />
-                            </div>
-
-                            <div class="info-item">
-                                <h2 class="info-heading">Chọn giới tính của bạn</h2>
-                                <select name="gender" class="genderSelect">
-                                    <option value="" seleted>Chọn giới tính</option>
-                                    <option value="Nam" <?= ($_SESSION['user']['gender']  ?? '') === 'Nam' ? 'selected' : ''; ?>>Nam</option>
-                                    <option value="Nữ" <?= ($_SESSION['user']['gender'] ?? '') === 'Nữ' ? 'selected' : ''; ?>>Nữ</option>
-                                    <option value="Khác" <?= ($_SESSION['user']['gender'] ?? '') === 'Khác' ? 'selected' : ''; ?>>Khác</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" name="btn-save" class="btn btn-profile btn-success">Lưu thông tin</button>
-                        </div>
-                    </form>
+                <h5 class="fw-bold mb-1"><?=htmlspecialchars($user['name_user'])?></h5>
+                <p class="text-muted small mb-3"><?=htmlspecialchars($user['email'])?></p>
+                <span class="badge bg-primary w-50 mx-auto mb-3"><?=$user['role'] ?? 'Client'?></span>
+                
+                <div class="list-group list-group-flush text-start border-top pt-2">
+                    <a href="?act=profile" class="list-group-item list-group-item-action active fw-bold">
+                        <i class="fa-solid fa-user me-2"></i>Thông tin cá nhân
+                    </a>
+                    <a href="?act=my-order" class="list-group-item list-group-item-action">
+                        <i class="fa-solid fa-box-open me-2"></i>Đơn hàng của tôi
+                    </a>
+                    <a href="?act=cart" class="list-group-item list-group-item-action">
+                        <i class="fa-solid fa-cart-shopping me-2"></i>Giỏ hàng
+                    </a>
+                    <a href="?act=logout" class="list-group-item list-group-item-action text-danger">
+                        <i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất
+                    </a>
                 </div>
             </div>
         </div>
+
+        <!-- Form cập nhật thông tin -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 p-4 bg-white rounded-3">
+                <h4 class="fw-bold text-primary mb-4"><i class="fa-solid fa-user-pen me-2"></i>Cập nhật thông tin cá nhân</h4>
+                
+                <form action="?act=update-profile" method="POST" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Họ và tên <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="name_user" value="<?=htmlspecialchars($user['name_user'])?>" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" name="email" value="<?=htmlspecialchars($user['email'])?>" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Số điện thoại</label>
+                            <input type="text" class="form-control" name="sdt" value="<?=htmlspecialchars($user['sdt'] ?? '')?>" placeholder="0339381785">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Giới tính</label>
+                            <select name="gender" class="form-select">
+                                <option value="">-- Chọn giới tính --</option>
+                                <option value="Nam" <?= (($user['gender'] ?? '') === 'Nam') ? 'selected' : '' ?>>Nam</option>
+                                <option value="Nữ" <?= (($user['gender'] ?? '') === 'Nữ') ? 'selected' : '' ?>>Nữ</option>
+                                <option value="Khác" <?= (($user['gender'] ?? '') === 'Khác') ? 'selected' : '' ?>>Khác</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Địa chỉ giao hàng mặc định</label>
+                            <textarea class="form-control" name="diachi" rows="2" placeholder="Nhập địa chỉ của bạn"><?=htmlspecialchars($user['diachi'] ?? '')?></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Ảnh đại diện mới</label>
+                            <input type="file" class="form-control" name="avatar" accept="image/*">
+                            <small class="text-muted">Chấp nhận định dạng: JPG, PNG, GIF. Để trống nếu không muốn đổi.</small>
+                        </div>
+
+                        <div class="col-12 mt-4 text-end">
+                            <button type="submit" name="btn-save" class="btn btn-primary px-4 py-2 fw-bold">
+                                <i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</main>
-<script>
-        function validateImage() {
-        var fileInput = document.querySelector('input[type="file"]');
-        var filePath = fileInput.value;
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-        if (!allowedExtensions.exec(filePath)) {
-            alert('Vui lòng chọn file ảnh có định dạng JPG hoặc PNG.');
-            fileInput.value = '';
-            return false;
-        }
-        return true;
-    }
-</script>
+</div>

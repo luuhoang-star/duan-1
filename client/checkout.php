@@ -1,136 +1,127 @@
-<main class="container"> 
-    <div class="container mt-5">
-        <h1 class="mb-4 text-center">Xác nhận thông tin </h1>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="?act=thanhtoan" method="POST">
-                            <?php
-                                if(isset($_SESSION['user'])){
-                                    $name = $_SESSION['user']['name_user'];
-                                    $address = $_SESSION['user']['diachi'];
-                                    $tel = $_SESSION['user']['sdt'];
-                                    $id_user= $_SESSION['user']['id_user'];
+<?php
+$user = $_SESSION['user'] ?? [];
+$id_user = $user['id_user'] ?? 0;
+$name = $user['name_user'] ?? '';
+$address = $user['diachi'] ?? '';
+$tel = $user['sdt'] ?? '';
+$email = $user['email'] ?? '';
+?>
 
-                                }
-                                else {
-                                    $name ="";
-                                    $address ="";
-                                    $tel = "";
-                                }
-                            ?>
-                            <h5 class="text-center">Thông tin khách hàng</h5>
-                          <label for="" class="form-label">Họ và tên</label>
-                          <input type="hidden" name="id_user" value="<?=$id_user?>">
-                          <input class="form-control" type="text" name="name_user" placeholder="Họ và tên"  value="<?=$name?>">
-                          <label for="" class="form-label">Địa chỉ</label>
-                          <input class="form-control" type="text" name="address_user" placeholder="Địa chỉ" value="<?=$address?>">
-                          <label for="" class="form-label">Số điện thoại</label>
-                          <input class="form-control" type="text" name="tel_user" placeholder="Số điện thoại" value="<?=$tel?>" >
+<div class="container my-5">
+    <h2 class="text-center text-primary mb-4 fw-bold"><i class="fa-solid fa-credit-card me-2"></i>Xác nhận & Thanh toán đơn hàng</h2>
+
+    <?php if (!empty($_SESSION['cart'])): ?>
+    <form action="?act=thanhtoan" method="POST">
+        <div class="row g-4">
+            <!-- Thông tin khách hàng & Giao hàng -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-primary text-white fw-bold py-3">
+                        <i class="fa-solid fa-user me-2"></i>Thông tin người nhận hàng
+                    </div>
+                    <div class="card-body p-4">
+                        <input type="hidden" name="id_user" value="<?=$id_user?>">
                         
-                       
-                    
-                        
-                           
-                           
-                            <div class="col-12 mt-4">
-                            <label for="" class="form-label">Phương thức thanh toán</label> 
-                                <select name="pttt">
-                                    <option value="1">Thanh toán trực tiếp</option>
-                                    <option value="2">Thanh toán QR MOMO</option>
-                                    <option value="3">Thanh toán ATM MOMO</option>
-                                </select>
-                                <input type="hidden" name="trangthai" value="0">
-                                <input type="hidden" name="trangthaitt" value="0">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Họ và tên người nhận <span class="text-danger">*</span></label>
+                            <input class="form-control" type="text" name="name_user" placeholder="Nhập họ và tên" value="<?=htmlspecialchars($name)?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Số điện thoại liên hệ <span class="text-danger">*</span></label>
+                            <input class="form-control" type="text" name="tel_user" placeholder="Nhập số điện thoại" value="<?=htmlspecialchars($tel)?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Địa chỉ nhận hàng <span class="text-danger">*</span></label>
+                            <textarea class="form-control" name="address_user" rows="2" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành..." required><?=htmlspecialchars($address)?></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Phương thức thanh toán <span class="text-danger">*</span></label>
+                            <div class="d-flex flex-column gap-2 mt-1">
+                                <div class="form-check p-3 border rounded">
+                                    <input class="form-check-input" type="radio" name="pttt" id="pttt1" value="1" checked>
+                                    <label class="form-check-label fw-bold" for="pttt1">
+                                        <i class="fa-solid fa-money-bill-wave text-success me-2"></i>Thanh toán khi nhận hàng (COD)
+                                    </label>
+                                </div>
+                                <div class="form-check p-3 border rounded">
+                                    <input class="form-check-input" type="radio" name="pttt" id="pttt2" value="2">
+                                    <label class="form-check-label fw-bold" for="pttt2">
+                                        <i class="fa-solid fa-qrcode text-danger me-2"></i>Thanh toán qua QR MoMo
+                                    </label>
+                                </div>
+                                <div class="form-check p-3 border rounded">
+                                    <input class="form-check-input" type="radio" name="pttt" id="pttt3" value="3">
+                                    <label class="form-check-label fw-bold" for="pttt3">
+                                        <i class="fa-solid fa-building-columns text-primary me-2"></i>Thanh toán qua ATM MoMo
+                                    </label>
+                                </div>
                             </div>
-                         
-                          
-                        
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                
-                    <div class="card-body d-flex">
-                    <input type="hidden" name="id_sp" value="<?=$ca['id_sp']?>">
-                        <input type="hidden" name="name_sp" value="<?=$ca['name_sp']?>">
-                        <input type="hidden" name="soluongsp" value="<?=$ca['soluongcart']?>">
-                        <input type="hidden" name="price_sp" value="<?=$ca['price_sp']?>">
-                        <input type="hidden" name="total_price" value="<?=$total?>">
-                        <input type="hidden" name="tong_soluong" value="<?=$total?>">
-                        
-                    
-                        <!-- <img src="../img/<?=$ca['image_sp']?>" alt="" width="80px"> -->
-                        <table class="tthd" cellpadding="5" cellspacing="5">
+
+            <!-- Tóm tắt đơn hàng -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-dark text-white fw-bold py-3">
+                        <i class="fa-solid fa-receipt me-2"></i>Tóm tắt giỏ hàng
+                    </div>
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="table-responsive flex-grow-1">
+                            <table class="table align-middle mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Size</th>
-                                        
-                                        <th class="text-center">Giá</th>
-                                        <th>Thành tiền</th>
+                                        <th>Sản phẩm</th>
+                                        <th class="text-center">Size</th>
+                                        <th class="text-center">SL</th>
+                                        <th class="text-end">Thành tiền</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
-                       $total =0 ;
-                       if(isset($_SESSION['cart'])){
-                        foreach($cart as $ca){
-                            $total_price = $ca['price_sp']* $ca['soluongcart'];
-                          
-                            $total +=$total_price;
-                            $_SESSION['tongbill'] = $total;
-							?>
-                            <input type="hidden" name="size" value="<?=$ca['size']?>">
-                                            <tr>
-                                                <td>
-                                                    <?= $ca['name_sp'] ?> <br>
-                                                    <u>Số lượng:</u>
-                                                    <?= $ca['soluongcart'] ?>
-                                                </td>
-                                                <td>
-                                                    <?=$ca['size']?>
-                                                </td>
-                                                <td>
-                                                    <?= number_format((int)$ca['price_sp'], 0, ",", ".") ?>₫
-                                                </td>
-                                                <td>
-                                                    <?=number_format((int)$total_price, 0, ",", ".")?>₫
-                                                </td>
-                                            </tr>
-                                            <?php } }?>
-                                        <tr>
-                                            <td colspan="3"><b>Tổng tiền (VND):</b></td>
-                                            <td>
-                                                <b>
-                                                    <?php if(isset($_SESSION['cart'])){ 
-                                               echo  number_format((int)$_SESSION['tongbill'], 0, ",", ".");
-                                               
-                                                    }
-                                                    else{
-                                                        echo '0';
-                                                    }
-                                                    ?>₫
-                                                </b>
-                                            </td>
-                                        </tr>
-                                    
-                                       
-                                    
+                                    <?php
+                                    $grand_total = 0;
+                                    foreach ($_SESSION['cart'] as $item):
+                                        $line_total = (int)$item['price_sp'] * (int)$item['soluongcart'];
+                                        $grand_total += $line_total;
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <div class="fw-bold"><?=htmlspecialchars($item['name_sp'])?></div>
+                                            <small class="text-muted"><?=number_format((int)$item['price_sp'], 0, ",", ".")?> ₫</small>
+                                        </td>
+                                        <td class="text-center"><span class="badge bg-secondary"><?=$item['size'] ?: 'N/A'?></span></td>
+                                        <td class="text-center fw-bold"><?=$item['soluongcart']?></td>
+                                        <td class="text-end fw-bold text-danger"><?=number_format($line_total, 0, ",", ".")?> ₫</td>
+                                    </tr>
+                                    <?php endforeach; 
+                                    $_SESSION['tongbill'] = $grand_total;
+                                    ?>
                                 </tbody>
                             </table>
-                      
-                        
+                        </div>
+
+                        <hr class="my-3">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="fs-5 fw-bold">Tổng thanh toán:</span>
+                            <span class="fs-4 fw-bold text-danger"><?=number_format($grand_total, 0, ",", ".")?> ₫</span>
+                        </div>
+
+                        <button type="submit" name="thanhtoan" class="btn btn-success btn-lg w-100 py-3 fw-bold shadow">
+                            <i class="fa-solid fa-check-circle me-2"></i>Xác nhận đặt hàng ngay
+                        </button>
                     </div>
-                
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container d-flex justify-content-center mt-5">
-        <button type="submit" name="thanhtoan" class="btn btn-primary ">Xác nhận đặt hàng</button>
-       </div>
-       </form>
-</main>             
+    </form>
+    <?php else: ?>
+        <div class="text-center py-5 bg-white rounded shadow-sm">
+            <h4 class="text-muted">Không có sản phẩm nào để thanh toán!</h4>
+            <a href="index.php?act=all-product" class="btn btn-primary mt-3">Quay lại mua hàng</a>
+        </div>
+    <?php endif; ?>
+</div>

@@ -1,94 +1,60 @@
-
-<div style="background-color: #DCDCDC;" class="ps-3 container">
-                      <a href="index.php" class=" text-black text-decoration-none">Trang chủ</a><a class="text-black text-decoration-none">/ Khách hàng</a> 
-                      </div>
-<div class="container bg-white shadow">
-
-<h3 class="pt-3 mt-2 mb-3">Khách hàng của ThanhHung Futsal</h3>
-<p>Được ra đời từ năm 2013 với mong muốn đem lại cho các bạn đam mê túc cầu giáo những đôi giày bóng đá chính hãng “CHẤT NHẤT” với giá cả “TỐT NHẤT” thị trường, từ những thương hiệu hàng đầu thế giới như NIKE, ADIDAS, PUMA, MIZUNO, ASICS, DESPORTE, JOMA, ATHLETA, X-MUNICH, GRAND SPORT, KAMITO v.v…</p>
-
-<p>Thanh Hùng Futsal mang đến cho các bạn dòng giày chuyên dành cho mặt sân bóng đá trong nhà FUTSAL và sân cỏ nhân tạo 5-7 người. Sản phẩm tại Thanh Hùng Futsal được mua trực tiếp từ công ty và các trang web uy tín của NIKE, ADIDAS v.v…. Với tiêu chí luôn cập nhật cho các bạn những mẫu giày bóng đá chính hãng mới nhất, hỗ trợ tư vấn các vấn đề liên quan đến giày đá banh. Uy tín của Shop gầy dựng trong những năm qua khách hàng có thể kiểm chứng thông qua facebook hoặc bạn bè, người thân. Shop không những bán hàng cho người tiêu dùng Việt Nam mà cả bạn bè quốc tế. Hiện tại Thanh Hùng Futsal đang là nhà tài trợ cho CLB VIC Friendship Futsal của Australia.</p>
-<p>
-    
-Ngoài ra khi mua hàng tại ThanhHung Futsal, các bạn sẽ được hỗ trợ trả góp không lãi suất với thủ tục cực kỳ đơn giản, giày đá banh mua tại shop sẽ được bảo hành 3 tháng và tặng 1 đôi với dệt kim cùng với 1 ba lô Thanh Hung Futsal.
-
-</p>
-<p>
-Để được tư vấn nhiều hơn về những đôi giày đá banh tại Thanh Hùng Futsal vui lòng liên hệ vào số Hotline/Zalo: 0901 710 780 hoặc gởi mess qua fanpage nhé!
-
-</p>
-<p>
-Shop hoạt động từ 9h tới 21h hàng ngày và cả 7 ngày trong tuần. Rất vui được đón tiếp các bạn.
-</p>
-<p>Mua Giày Bóng Đá Chính Hãng Ở TP. HCM tại:</p>
-
-<p>Thanh Hùng Futsal Store I: <b>27 ĐƯỜNG D52, P. 12, Q. TÂN BÌNH, TP. HCM | ĐT: 0901 710 780 - 028 38429720</b></p>
-<p>Shop nằm ngay sau cây xăng ở ngã 4 Hoàng Hoa Thám – Cộng Hòa,</p>
-<p>Đối diện cổng Doanh trại quân đội 367</p>
-
-<p>Thanh Hùng Futsal Store II: <b>32A THẠCH THỊ THANH, P. TÂN ĐỊNH, Q. 1, TP. HCM | ĐT: 0901 710 730</b></p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="container my-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="bg-light p-3 rounded mb-4">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Khách hàng & Hệ thống cửa hàng</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow-sm border-0 p-4 p-md-5 bg-white rounded-3">
+        <h2 class="fw-bold text-primary mb-4">Khách hàng của 8 Football Store</h2>
+        
+        <p class="fs-6" style="line-height: 1.8;">
+            Được ra đời với mong muốn đem lại cho các bạn đam mê túc cầu giáo những đôi giày bóng đá chính hãng <strong>“CHẤT NHẤT”</strong> với giá cả <strong>“TỐT NHẤT”</strong> thị trường, từ những thương hiệu hàng đầu thế giới như <strong>NIKE, ADIDAS, PUMA, MIZUNO, JOMA, KAMITO</strong> v.v…
+        </p>
+
+        <p class="fs-6" style="line-height: 1.8;">
+            <strong>8 Football Store</strong> mang đến cho các bạn dòng giày chuyên dành cho mặt sân bóng đá trong nhà (Futsal) và sân cỏ nhân tạo 5-7 người cũng như sân cỏ tự nhiên 11 người. Sản phẩm tại 8 Football Store được nhập khẩu chính hãng từ các nhà phân phối uy tín hàng đầu.
+        </p>
+
+        <div class="row g-4 my-3">
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light">
+                    <h5 class="fw-bold text-dark"><i class="fa-solid fa-shield-halved text-primary me-2"></i>Chính sách bảo hành & Đổi trả</h5>
+                    <ul class="mb-0 ps-3">
+                        <li>Bảo hành keo chỉ 6 tháng cho mọi sản phẩm giày.</li>
+                        <li>Đổi size miễn phí trong vòng 7 ngày nếu không vừa.</li>
+                        <li>Tặng kèm túi rút thể thao cho mọi đơn hàng.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light">
+                    <h5 class="fw-bold text-dark"><i class="fa-solid fa-clock text-success me-2"></i>Thời gian hoạt động</h5>
+                    <ul class="mb-0 ps-3">
+                        <li>Mở cửa từ <strong>08:30 đến 21:30</strong> hàng ngày (kể cả Thứ 7, CN).</li>
+                        <li>Hỗ trợ tư vấn online 24/7 qua Hotline/Zalo.</li>
+                        <li>Hotline: <strong>0339 381 785</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="fw-bold text-dark mt-4 mb-3"><i class="fa-solid fa-store me-2"></i>Hệ thống cửa hàng</h4>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="p-3 border-start border-4 border-primary bg-light rounded">
+                    <h6 class="fw-bold mb-1">Store I - Hà Nội</h6>
+                    <p class="small text-muted mb-0">Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội | ĐT: 0339 381 785</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border-start border-4 border-success bg-light rounded">
+                    <h6 class="fw-bold mb-1">Store II - TP. Hồ Chí Minh</h6>
+                    <p class="small text-muted mb-0">Đường D52, Phường 12, Quận Tân Bình, TP. HCM | ĐT: 0901 710 780</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

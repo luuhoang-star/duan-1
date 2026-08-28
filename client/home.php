@@ -1,207 +1,141 @@
-<style>
-.product .overlay {
-  display: none;
-  transition: opacity 0.5s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+<?php
+$topProducts = top6Product();
+$newProducts = NewProduct();
+?>
 
-.product:hover .overlay {
-  display: flex;
-  opacity: 1;
- 
-  
-}
-
-.product .overlay .content button {
-  display: none;
-}
-
-
-.product:hover .overlay .content button {
-  display: block;
-}
-
-</style>
-<body>
-      
-<div class="container">
-  <!-- Phần banner  -->
-  <div class="row">
-    <div class="col">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-interval="2000">
-
-        <ol class="carousel-indicators">
-          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></li>
-        </ol>
-        <div class=" carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://theme.hstatic.net/200000278317/1000929405/14/slideshow_1.jpg?v=1170" class="d-block w-100" alt="Image 1" >
-          </div>
-          <div class="carousel-item">
-           <a href="index.php?act=all-product "> <img src="https://theme.hstatic.net/200000278317/1000929405/14/slideshow_4.jpg?v=1170" class="d-block w-100" alt="Image 2" ></a>
-          </div>
-          <div class="carousel-item">
-            <img src="https://theme.hstatic.net/200000278317/1000929405/14/slideshow_7.jpg?v=1170" class="d-block w-100" alt="Image 3" >
-          </div>
-          <div class="carousel-item">
-            <img src="https://theme.hstatic.net/200000278317/1000929405/14/slideshow_7.jpg?v=1170" class="d-block w-100" alt="Image 4" >
-          </div>
+<!-- Banner Slider -->
+<div class="container my-4">
+    <div id="carouselExampleIndicators" class="carousel slide rounded shadow overflow-hidden" data-bs-ride="carousel" data-bs-interval="3500">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </a>
-      </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="index.php?act=all-product">
+                    <img src="https://theme.hstatic.net/200000278317/1000929405/14/slideshow_1.jpg?v=1170" class="d-block w-100" alt="Banner 1" style="max-height: 450px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="index.php?act=all-product">
+                    <img src="https://theme.hstatic.net/200000278317/1000929405/14/slideshow_4.jpg?v=1170" class="d-block w-100" alt="Banner 2" style="max-height: 450px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="index.php?act=all-product">
+                    <img src="https://theme.hstatic.net/200000278317/1000929405/14/slideshow_7.jpg?v=1170" class="d-block w-100" alt="Banner 3" style="max-height: 450px; object-fit: cover;">
+                </a>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<!-- Dịch vụ & Cam kết -->
+<div class="container my-5">
+    <div class="row g-4 text-center">
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded shadow-sm h-100 border">
+                <div class="text-primary mb-3"><i class="fa-solid fa-truck-fast fa-2x"></i></div>
+                <h5 class="fw-bold">Miễn phí vận chuyển</h5>
+                <p class="text-muted small mb-0">Miễn phí vận chuyển cho các đơn hàng đạt hạn mức</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded shadow-sm h-100 border">
+                <div class="text-success mb-3"><i class="fa-solid fa-rotate-left fa-2x"></i></div>
+                <h5 class="fw-bold">Đổi trả trong 30 ngày</h5>
+                <p class="text-muted small mb-0">Đổi size hoặc hoàn tiền nhanh chóng nếu không vừa</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded shadow-sm h-100 border">
+                <div class="text-warning mb-3"><i class="fa-solid fa-headset fa-2x"></i></div>
+                <h5 class="fw-bold">Hỗ trợ 24/7</h5>
+                <p class="text-muted small mb-0">Tư vấn chọn giày và chọn size tận tình, chu đáo</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sản phẩm nổi bật -->
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold text-dark mb-0"><i class="fa-solid fa-fire text-danger me-2"></i>Sản phẩm nổi bật</h3>
+        <a href="index.php?act=all-product" class="text-decoration-none fw-bold text-primary">Xem tất cả &rarr;</a>
     </div>
     
-  </div>
-
-  <hr>
-</div> <br>
-<br> 
-<!-- hết banner  -->
-
-
-<div class="service-area">
-  <div class="container">
-      <div class="service-nav">
-          <div class="row">
-              <div class="col" >
-                  <div class="service-item">
-                      <div class="content text-center">
-                          <h4>Miễn phí vận chuyển</h4>
-                          <p>Miễn phí vẫn chuyển cho mọi đơn hàng</p>
-                      </div>
-                  </div>
-              </div>
-              
-              <div class="col">
-                  <div class="service-item">
-                      <div class="content text-center">
-                          <h4>Hoàn tiền</h4>
-                          <p>Bạn có 30 ngày đổi trả miễn phí</p>
-                      </div>
-                  </div>
-              </div>
-              
-              <div class="col">
-                  <div class="service-item">
-                      <div class="content text-center">
-                          <h4>Hỗ trợ trực tuyến</h4>
-                          <p>Hỗ trợ 24/24</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-
-<hr class="container">
-<div class="product-area ">
-<div class="container ">
-
-<div class="row d-flex ">
-    <div class="col-lg-12">
-        <div class="section-title ">
-            <h3 class="text-center">Sản phẩm nổi bật</h3>
-            <div class="product-arrow"></div>
-        </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <?php foreach($topProducts as $sp): ?>
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden product-card bg-white position-relative">
+                    <a href="?act=viewProduct&id_sp=<?=$sp['id_sp']?>&id_dm=<?=$sp['id_dm']?>">
+                        <img src="../img/<?=$sp['image_sp']?>" class="card-img-top p-2" alt="<?=htmlspecialchars($sp['name_sp'])?>" style="height: 220px; object-fit: contain;">
+                    </a>
+                    <div class="card-body d-flex flex-column text-center p-3">
+                        <h6 class="card-title mb-2 text-truncate" title="<?=htmlspecialchars($sp['name_sp'])?>">
+                            <a href="?act=viewProduct&id_sp=<?=$sp['id_sp']?>&id_dm=<?=$sp['id_dm']?>" class="text-dark text-decoration-none fw-bold">
+                                <?=htmlspecialchars($sp['name_sp'])?>
+                            </a>
+                        </h6>
+                        <div class="mt-auto">
+                            <p class="text-danger fw-bold fs-5 mb-2"><?=number_format((int)$sp['price_sp'], 0, ",", ".")?> ₫</p>
+                            <a href="?act=viewProduct&id_sp=<?=$sp['id_sp']?>&id_dm=<?=$sp['id_dm']?>" class="btn btn-sm btn-primary w-100 rounded-pill">
+                                <i class="fa-solid fa-eye me-1"></i> Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
-    <?php
-require_once '../model/List.php';
-$listProduct = top6Product();
-foreach($listProduct as $sp){ ?>
-    <div class="col-3  mt-3 mb-3 d-flex justify-content-center ">
-      <a href="?act=viewProduct&id_sp=<?=$sp['id_sp']?>&id_dm=<?=$sp['id_dm']?>" class="text-black" style="text-decoration: none;">
-    <form action="?act=add-to-cart" method="POST"  enctype="multipart/form-data" class="position-relative">
-      <div class="product">
-        <input type="hidden" name="id_sp" value="<?=$sp['id_sp']?>">
-        <img src="../img/<?=$sp['image_sp']?>" alt="Product 1" style="min-height: 270px; width:300px;" class="justify-content-center" >
-        <input type="hidden" name="image_sp" value="<?=$sp['image_sp']?>">
-        <input type="hidden" name="soluongcart" value="1" >
-        <div class="overlay">
-          <div class="content">
-            <p><?=$sp['name_sp']?></p>
-            <input type="hidden" name="name_sp" value="<?=$sp['name_sp']?>" >
-            <p class="text-danger fw-bold"><?=number_format((int)$sp['price_sp'], 0, ",", ".")?>₫ </p>
-            <input type="hidden" name="price_sp" value="<?=$sp['price_sp']?>">
-            <button type="submit" name="addToCart" class="border-0 p-3 position-absolute text-black  top-0 start-0 translate-middl" ><i class="fa-solid fa-cart-plus fa-xl"></i> </button>
-     
+</div>
 
-          </div>
-        </div>
-      </div>
-      </form>
-      </a>
+<!-- Sản phẩm mới -->
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold text-dark mb-0"><i class="fa-solid fa-sparkles text-warning me-2"></i>Sản phẩm mới ra mắt</h3>
+        <a href="index.php?act=all-product" class="text-decoration-none fw-bold text-primary">Xem tất cả &rarr;</a>
     </div>
-<?php } ?>
-
-
-
-
-</div>
-<hr class="container mb-5"> 
-<div class="row d-flex ">
-    <div class="col-lg-12">
-        <div class="section-title ">
-            <h3 class="text-center">Sản phẩm mới</h3>
-            <div class="product-arrow"></div>
-        </div>
+    
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <?php foreach($newProducts as $sp): ?>
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden product-card bg-white position-relative">
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-2">Mới</span>
+                    <a href="?act=viewProduct&id_sp=<?=$sp['id_sp']?>&id_dm=<?=$sp['id_dm']?>">
+                        <img src="../img/<?=$sp['image_sp']?>" class="card-img-top p-2" alt="<?=htmlspecialchars($sp['name_sp'])?>" style="height: 220px; object-fit: contain;">
+                    </a>
+                    <div class="card-body d-flex flex-column text-center p-3">
+                        <h6 class="card-title mb-2 text-truncate" title="<?=htmlspecialchars($sp['name_sp'])?>">
+                            <a href="?act=viewProduct&id_sp=<?=$sp['id_sp']?>&id_dm=<?=$sp['id_dm']?>" class="text-dark text-decoration-none fw-bold">
+                                <?=htmlspecialchars($sp['name_sp'])?>
+                            </a>
+                        </h6>
+                        <div class="mt-auto">
+                            <p class="text-danger fw-bold fs-5 mb-2"><?=number_format((int)$sp['price_sp'], 0, ",", ".")?> ₫</p>
+                            <a href="?act=viewProduct&id_sp=<?=$sp['id_sp']?>&id_dm=<?=$sp['id_dm']?>" class="btn btn-sm btn-outline-primary w-100 rounded-pill">
+                                <i class="fa-solid fa-eye me-1"></i> Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
-    <?php
-require_once '../model/List.php';
-$listProduct = NewProduct();
-foreach($listProduct as $sp){ ?>
-    <div class="col-3  mt-3 mb-3 d-flex justify-content-center ">
-      <a href="?act=viewProduct&id_sp=<?=$sp['id_sp']?>&id_dm=<?=$sp['id_dm']?>" class="text-black" style="text-decoration: none;">
-    <form action="?act=add-to-cart" method="POST"  enctype="multipart/form-data" class="position-relative">
-      <div class="product">
-        <input type="hidden" name="id_sp" value="<?=$sp['id_sp']?>">
-        <img id="image" src="../img/<?=$sp['image_sp']?>" alt="Product 1" style="min-height: 270px; max-width:300px;">
-        <input type="hidden" name="image_sp" value="<?=$sp['image_sp']?>">
-        <input type="hidden" name="soluongcart" value="1" >
-        <input type="hidden" name="selectedSize" value="0">
-        <div class="overlay">
-          <div class="content">
-            <p><?=$sp['name_sp']?></p>
-            <input type="hidden" name="name_sp" value="<?=$sp['name_sp']?>" >
-            <p class="text-danger fw-bold"><?=number_format((int)$sp['price_sp'], 0, ",", ".")?>₫ </p>
-            <input type="hidden" name="price_sp" value="<?=$sp['price_sp']?>">
-            <button type="submit" name="addToCart" class="border-0 p-3 position-absolute text-black  top-0 start-0 translate-middl" ><i class="fa-solid fa-cart-plus fa-xl"></i> </button>
-            <a  name="" class="btn btn-danger   position-absolute text-white  top-0 end-0 " ><span>Mới ra mắt </span></a>
-     
+</div>
 
-          </div>
-        </div>
-      </div>
-      </form>
-      </a>
+<!-- Banner thương hiệu -->
+<div class="container my-5 text-center">
+    <div class="card border-0 shadow-sm overflow-hidden rounded-3">
+        <img src="../img/banner-giua.jpg" alt="Banner Khách hàng" class="img-fluid w-100">
     </div>
-<?php } ?>
-
-
-
-
 </div>
-
-<br>
-<br>
-</div>
-
-<div class="container">
-  <hr>
- <h3 class="text-center">KHÁCH HÀNG CỦA 8 FOOTBALL</h3>
- <img src="../img/banner-giua.jpg" alt="" width="100%">
-</div>
-
-</body>

@@ -1,49 +1,67 @@
 <?php
-foreach($User as $us){
-    extract($us);
-}
-
+$user_data = is_array($User) && isset($User[0]) ? $User[0] : (is_array($User) ? $User : []);
+$id_user = $user_data['id_user'] ?? ($_GET['id_user'] ?? 0);
+$name_user = $user_data['name_user'] ?? '';
+$gender = $user_data['gender'] ?? 'Chưa cập nhật';
+$avatar = $user_data['avatar'] ?? 'user.png';
+$email = $user_data['email'] ?? '';
+$sdt = $user_data['sdt'] ?? 'Chưa cập nhật';
+$diachi = $user_data['diachi'] ?? 'Chưa cập nhật';
+$role = $user_data['role'] ?? 'Client';
 ?>
 
-<form class="mt-4 d-flex flex-column gap-2" action="index.php?act=update_user&id_user=<?=$id_user?>" enctype="multipart/form-data" method="POST">
-     <br>
-     
-     <h2 class="text-center text-primary">Cập nhật tài khoản</h2>
-     <div class="form-group">
-     <div class="form-group">
-          <label>Tên tài khoản </label>
-          <input type="text" class="form-control" placeholder="Enter product name" disabled require id="product_name" name="product_name" value="<?=$name_user?>">
-     </div>
-     <div class="form-group">
-          <label>Giới tính</label>
-          <input type="text" class="form-control" placeholder="Enter product price" disabled require id="product_price" name="product_price" value="<?=$gender?>">
-     </div>
-     <div class="form-group">
-          <label>avatar</label>
-         <img src="../img/<?=$avatar?>" alt="" width="70px" class="m-3">
-     </div>
-     <div class="form-group">
-          <label>Email</label>
-          <input type="text" class="form-control" placeholder="Enter product price" disabled require id="product_price" name="product_price" value="<?=$email?>">
-     </div>
-     <div class="form-group">
-          <label>Số điện thoại</label>
-          <input type="text" class="form-control" placeholder="Enter product price" disabled require id="product_price" name="product_price" value="<?=$sdt?>">
-     </div>
-     <div class="form-group">
-          <label>Vai trò</label>
-        <select name="role" id="" class="form-control">
-            <option value="">Lựa chọn</option>
-            <option value="Client">CLient</option>
-            <option value="Admin">Admin</option>
-            
-        </select>
-     </div>
+<div class="container-fluid mt-4">
+    <h2 class="text-center text-primary mb-4">Cập nhật quyền tài khoản #<?=$id_user?></h2>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <form class="d-flex flex-column gap-3 shadow-sm p-4 bg-white rounded" action="index.php?act=update_user&id_user=<?=$id_user?>" method="POST">
+                <div class="text-center mb-3">
+                    <img src="../img/<?=$avatar?>" alt="Avatar" class="rounded-circle img-thumbnail" style="width: 90px; height: 90px; object-fit: cover;">
+                </div>
 
-     
+                <div class="form-group">
+                    <label class="form-label fw-bold">Tên tài khoản</label>
+                    <input type="text" class="form-control" disabled value="<?=htmlspecialchars($name_user)?>">
+                </div>
 
-     <div class="d-flex justify-content-between"> 
-          <button type="submit" class="btn btn-primary w-25 mt-4" name="update-user">Cập nhật</button>
-          <button type="reset" class="btn btn-warning text-white w-25 mt-4">Reset</button>
-     </div>
-</form>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label class="form-label fw-bold">Email</label>
+                        <input type="email" class="form-control" disabled value="<?=htmlspecialchars($email)?>">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="form-label fw-bold">Số điện thoại</label>
+                        <input type="text" class="form-control" disabled value="<?=htmlspecialchars($sdt)?>">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label class="form-label fw-bold">Giới tính</label>
+                        <input type="text" class="form-control" disabled value="<?=htmlspecialchars($gender)?>">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="form-label fw-bold">Địa chỉ</label>
+                        <input type="text" class="form-control" disabled value="<?=htmlspecialchars($diachi)?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label fw-bold text-danger">Vai trò / Quyền hạn hệ thống</label>
+                    <select name="role" class="form-select" required>
+                        <option value="Client" <?= $role === 'Client' ? 'selected' : '' ?>>Client (Khách hàng)</option>
+                        <option value="Admin" <?= $role === 'Admin' ? 'selected' : '' ?>>Admin (Quản trị viên)</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="submit" class="btn btn-primary px-4" name="update-user">
+                        <i class="fa-solid fa-check"></i> Lưu thay đổi
+                    </button>
+                    <a href="index.php?act=list-users" class="btn btn-secondary px-4">Quay lại danh sách</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

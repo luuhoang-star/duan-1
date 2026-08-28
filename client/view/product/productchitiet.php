@@ -1,260 +1,194 @@
 <?php
-if($Product['matsan']==1){
-  echo '
-  <div style="background-color: #DCDCDC;" class="ps-3 container">
-                      <a href="index.php" class=" text-black text-decoration-none">Trang chủ</a><a class="text-black text-decoration-none">/ Danh mục</a> <a href="?act=loai&matsan=1" class="text-black text-decoration-none">/ Giày cỏ nhân tạo</a> <a href="" class="text-black text-decoration-none">/ Chi tiết sản phẩm</a>
-                      </div>
-  ';
-}
-if($Product['matsan']==2){
-  echo '
-  <div style="background-color: #DCDCDC;" class="ps-3 container">
-                      <a href="index.php" class=" text-black text-decoration-none">Trang chủ</a><a class="text-black text-decoration-none">/ Danh mục</a> <a href="?act=loai&matsan=2" class="text-black text-decoration-none">/ Giày cỏ tự nhiên</a> <a href="" class="text-black text-decoration-none">/ Chi tiết sản phẩm</a>
-                      </div>
-  ';
-}
-if($Product['matsan']==3){
-  echo '
-  <div style="background-color: #DCDCDC;" class="ps-3 container">
-                      <a href="index.php" class=" text-black text-decoration-none">Trang chủ</a><a class="text-black text-decoration-none">/ Danh mục</a> <a href="?act=loai&matsan=3" class="text-black text-decoration-none">/ Phụ kiện</a> <a href="" class="text-black text-decoration-none">/ Chi tiết sản phẩm</a>
-                      </div>
-  ';
-}
+$id_sp = (int)($_GET['id_sp'] ?? 0);
+$id_dm = (int)($Product['id_dm'] ?? ($_GET['id_dm'] ?? 0));
 
+$matsan_name = "Chưa phân loại";
+if (($Product['matsan'] ?? 0) == 1) $matsan_name = "Giày cỏ nhân tạo (Turf)";
+elseif (($Product['matsan'] ?? 0) == 2) $matsan_name = "Giày cỏ tự nhiên (Ag, Fg)";
+elseif (($Product['matsan'] ?? 0) == 3) $matsan_name = "Phụ kiện thể thao";
+
+$related_products = productrelated($id_dm);
+$product_comments = loadCmtByProduct($id_sp);
 ?>
-   <section class="container mt-4">
-      <h2 class="text-center mt-4 mb-5">Chi tiết sản phẩm</h2>
-      <style>
-    /* Ẩn các ô radio */
-/* Hiệu ứng khi hover và khi được chọn */
-.size-option {
-    cursor: pointer;
-}
 
-.size-option:hover {
-    background-color: lightgray;
-}
+<div class="container my-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="bg-light p-3 rounded mb-4">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="index.php?act=all-product" class="text-decoration-none">Sản phẩm</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><?=htmlspecialchars($Product['name_sp'])?></li>
+        </ol>
+    </nav>
 
-.size-option.active {
-    background-color: lightblue;
-}
-
-</style>
-
-       <div class="row">
-       
-                     
-            <div class="col-lg-6 d-flex justify-content-center p-1 border mb-1 pb-9" >
-            <form action="?act=add-to-cart" method="POST"  enctype="multipart/form-data">
-        <input type="hidden" name="name_sp" value="<?=$Product['name_sp']?>">
-        <input type="hidden" name="image_sp" value="<?=$Product['image_sp']?>">
-     
-        <input type="hidden" name="price_sp" value="<?=$Product['price_sp']?>">
-
-        <input type="hidden" name="id_sp" value="<?=$_GET['id_sp']?>">
-                <img src="../img/<?=$Product['image_sp']?>" alt="Product Image" class="img-fluid" name="image">
-                
+    <!-- Chi tiết sản phẩm -->
+    <div class="card shadow-sm border-0 p-4 bg-white rounded-3 mb-5">
+        <div class="row g-4">
+            <!-- Ảnh sản phẩm -->
+            <div class="col-lg-5 text-center">
+                <div class="p-3 border rounded-3 bg-light">
+                    <img src="../img/<?=$Product['image_sp']?>" alt="<?=htmlspecialchars($Product['name_sp'])?>" class="img-fluid" style="max-height: 380px; object-fit: contain;">
+                </div>
             </div>
-            <div class="col-lg-6">
-                <h4><?=$Product['name_sp']?> </h4>
-                <p>Loại : 
-                  <?php
-if($Product['matsan']==1){
-  echo "Giày cỏ nhân tạo (Turf)";
-}
-if($Product['matsan']==2){
-  echo "Giày cỏ tự nhiên (Ag, Fg)";
-}
-if($Product['matsan']==3){
-  echo "Phụ kiện";
-}
 
-?>
+            <!-- Thông tin & Mua hàng -->
+            <div class="col-lg-7">
+                <form action="?act=add-to-cart" method="POST">
+                    <input type="hidden" name="id_sp" value="<?=$Product['id_sp']?>">
+                    <input type="hidden" name="name_sp" value="<?=htmlspecialchars($Product['name_sp'])?>">
+                    <input type="hidden" name="image_sp" value="<?=$Product['image_sp']?>">
+                    <input type="hidden" name="price_sp" value="<?=$Product['price_sp']?>">
+                    <input type="hidden" id="selectedSize" name="selectedSize" value="40">
 
-                 </p>
-                <h3 class="text-danger"><?=number_format((int)$Product['price_sp'], 0, ",", ".")?>₫</h3>
-    
-                <!-- Chọn màu -->
-                <div class="container">
-                    <div class="row">
-                    <div class="col-md-4 ml-2">
-                    <div class="col-md-4 ml-2">
-    <p>Chọn size</p>
-    <div class="form-group d-flex">
-        <div class="border p-1 me-2 size-option" data-value="40">40</div>
-        <div class="border p-1 me-2 size-option" data-value="41">41</div>
-        <div class="border p-1 me-2 size-option" data-value="42">42</div>
-        <div class="border p-1 me-2 size-option" data-value="43">43</div>
-        <div class="border p-1 me-2 size-option" data-value="44">44</div>
+                    <h3 class="fw-bold text-dark mb-2"><?=htmlspecialchars($Product['name_sp'])?></h3>
+                    <p class="text-muted mb-2"><i class="fa-solid fa-tag me-1"></i>Loại: <span class="badge bg-secondary"><?=$matsan_name?></span></p>
+                    
+                    <div class="my-3">
+                        <h2 class="text-danger fw-bold"><?=number_format((int)$Product['price_sp'], 0, ",", ".")?> ₫</h2>
+                    </div>
+
+                    <!-- Chọn Size -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Chọn kích cỡ (Size):</label>
+                        <div class="d-flex gap-2">
+                            <?php foreach(['40', '41', '42', '43', '44'] as $idx => $sz): ?>
+                                <button type="button" class="btn btn-outline-dark size-btn <?= $idx === 0 ? 'active' : '' ?>" data-size="<?=$sz?>">
+                                    <?=$sz?>
+                                </button>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <!-- Số lượng -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Số lượng:</label>
+                        <div class="d-flex align-items-center gap-3">
+                            <input type="number" name="soluongcart" class="form-control text-center" value="1" min="1" max="<?=$Product['soluong']?>" style="width: 90px;">
+                            <span class="text-muted small"><?=$Product['soluong']?> sản phẩm có sẵn</span>
+                        </div>
+                    </div>
+
+                    <!-- Nút Mua -->
+                    <div class="d-flex gap-3 mt-4">
+                        <button type="submit" name="addToCart" class="btn btn-outline-success btn-lg px-4 fw-bold">
+                            <i class="fa-solid fa-cart-plus me-2"></i>Thêm vào giỏ hàng
+                        </button>
+                        <button type="submit" name="buy-now" class="btn btn-danger btn-lg px-4 fw-bold">
+                            <i class="fa-solid fa-bolt me-2"></i>Mua ngay
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Mô tả chi tiết -->
+        <div>
+            <h4 class="fw-bold mb-3"><i class="fa-solid fa-file-lines me-2"></i>Mô tả chi tiết sản phẩm</h4>
+            <div id="detailDescription" style="max-height: 250px; overflow: hidden; line-height: 1.8;" class="text-secondary">
+                <?= nl2br(htmlspecialchars($Product['desc_sp'])) ?>
+            </div>
+            <div class="text-center mt-3">
+                <button type="button" class="btn btn-sm btn-outline-primary" id="toggleDescriptionBtn" onclick="toggleDescription()">
+                    Xem thêm <i class="fa-solid fa-chevron-down ms-1"></i>
+                </button>
+            </div>
+        </div>
     </div>
-    <input type="hidden" id="selectedSize" name="selectedSize">
+
+    <!-- Sản phẩm liên quan -->
+    <div class="my-5">
+        <h4 class="fw-bold text-dark mb-4"><i class="fa-solid fa-layer-group me-2"></i>Sản phẩm cùng thương hiệu</h4>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+            <?php foreach($related_products as $rel): 
+                if ($rel['id_sp'] == $id_sp) continue;
+            ?>
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden product-card bg-white text-center">
+                        <a href="?act=viewProduct&id_sp=<?=$rel['id_sp']?>&id_dm=<?=$rel['id_dm']?>">
+                            <img src="../img/<?=$rel['image_sp']?>" class="card-img-top p-2" alt="<?=htmlspecialchars($rel['name_sp'])?>" style="height: 180px; object-fit: contain;">
+                        </a>
+                        <div class="card-body p-2 d-flex flex-column">
+                            <h6 class="card-title text-truncate mb-1" title="<?=htmlspecialchars($rel['name_sp'])?>">
+                                <a href="?act=viewProduct&id_sp=<?=$rel['id_sp']?>&id_dm=<?=$rel['id_dm']?>" class="text-dark text-decoration-none fw-bold small">
+                                    <?=htmlspecialchars($rel['name_sp'])?>
+                                </a>
+                            </h6>
+                            <p class="text-danger fw-bold mb-2 small"><?=number_format((int)$rel['price_sp'], 0, ",", ".")?> ₫</p>
+                            <a href="?act=viewProduct&id_sp=<?=$rel['id_sp']?>&id_dm=<?=$rel['id_dm']?>" class="btn btn-sm btn-outline-primary mt-auto">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <!-- Bình luận & Đánh giá -->
+    <div class="card shadow-sm border-0 p-4 bg-white rounded-3 mb-5">
+        <h4 class="fw-bold mb-4"><i class="fa-solid fa-comments me-2"></i>Đánh giá & Bình luận</h4>
+
+        <!-- Form gửi bình luận -->
+        <?php if (isset($_SESSION['user'])): ?>
+            <form method="POST" action="?act=comment&id_sp=<?=$id_sp?>&id_dm=<?=$id_dm?>" class="mb-4 p-3 bg-light rounded border">
+                <input type="hidden" name="id_sp" value="<?=$id_sp?>">
+                <input type="hidden" name="id_user" value="<?=$_SESSION['user']['id_user']?>">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Để lại cảm nghĩ của bạn về sản phẩm:</label>
+                    <textarea class="form-control" rows="3" name="cmt" placeholder="Sản phẩm rất tốt, đi êm chân, vừa size..." required></textarea>
+                </div>
+                <button type="submit" name="comment" class="btn btn-primary">
+                    <i class="fa-solid fa-paper-plane me-1"></i> Gửi đánh giá
+                </button>
+            </form>
+        <?php else: ?>
+            <div class="alert alert-info py-2 mb-4">
+                Vui lòng <a href="?act=login" class="fw-bold text-decoration-none">Đăng nhập</a> để tham gia đánh giá sản phẩm.
+            </div>
+        <?php endif; ?>
+
+        <!-- Danh sách bình luận -->
+        <div class="comment-list">
+            <?php if (!empty($product_comments)): ?>
+                <?php foreach($product_comments as $comment): ?>
+                    <div class="d-flex gap-3 mb-3 pb-3 border-bottom">
+                        <img src="../img/<?=$comment['avatar'] ?? 'user.png'?>" alt="User" class="rounded-circle" style="width: 45px; height: 45px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <h6 class="fw-bold mb-0"><?=htmlspecialchars($comment['name_user'])?></h6>
+                                <small class="text-muted"><?=date('d/m/Y H:i', strtotime($comment['time']))?></small>
+                            </div>
+                            <p class="text-secondary mb-0"><?=htmlspecialchars($comment['content_cmt'])?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="text-muted text-center py-3 mb-0">Chưa có bình luận nào cho sản phẩm này. Hãy là người đầu tiên đánh giá!</p>
+            <?php endif; ?>
+        </div>
+    </div>
 </div>
 
-                    </div>
-                  </div> <br>
-                  <p>Số lượng</p>
-                  <div >
-        
-        <input type="number" name="soluongcart" id="quantityInput" value="1" min="1" max="<?=$Product['soluong']?>" style="width: 50px; height: 30px;">
-       
-         <?=$Product['soluong']?> sản phẩm có sẵn
-    </div>
-    <br>
-    <button class="btn btn-success" type="submit" name="addToCart" >Thêm vào giỏ hàng</button>
-    <button class="btn btn-danger" type="submit" name="buy-now">Mua ngay</button>
-                
-        </div>
-            </div>
-
-    
-       </form>
-
-        <!-- Thông số kỹ thuật -->
-      
-        <div class="row mt-4">
-            <div class="col-lg-12 fs-5 ">
-                <h3>Mô tả chi tiết</h3>
-                <p id="detailDescription" style="max-height: 300px; overflow: hidden;">
-    <?=nl2br($Product['desc_sp'])?>
-</p>
-
-<a href="#" class="d-flex justify-content-center" onclick="expandDescription()" id="toggleDescription">Xem thêm</a>
-
-            </div>
-        </div>
-        <h3>Sản phẩm khác</h3>
-       <div class="container row">
-        
-       
-       <?php 
-               require_once '../model/list.php';
-               $id_dm = $_GET['id_dm'];
-               $Product = productrelated ($id_dm);
-               foreach($Product as $sp){ ?>
-
-      <div class="col-3  pd-3  mt-3 mb-3 ">
-    <a href="?act=viewProduct&id_sp=<?=$sp['id_sp']?>&id_dm=<?=$sp['id_dm']?>" class="text-black" style="text-decoration: none;">
-
-      <div class="product" >
-        <img src="../img/<?=$sp['image_sp']?>" alt="Image Product" style="min-height: 270px; max-width:300px;" >
-        <div class="overlay">
-          <div class="content">
-            <p><?=$sp['name_sp']?></p>
-            <p class="text-danger"> <?=$sp['price_sp']?>₫ </p>
-            <button class="btn btn-success" type="submit" name="addToCart" onclick="setAction('add-to-cart')">Thêm vào giỏ hàng</button>
-    <a class="btn btn-danger" name="buyNow" href="?act=buy-now" onclick="setAction('buy-now')">Mua ngay</a>
-    
-          </div>
-        </div>
-      
-    </a>
-        </div>
-    </div>
-
-      <?php  } ?>
-       </div>
-
-  <div class="row mt-4">
-    <div class="col-md-6">
-      <h3>Đánh giá | Bình luận</h3>
- <div class="container">
- <?php
-
- foreach($cmt as $comment){
-  if($comment['id_sp'] == $_GET['id_sp']){
-      
-   $now = time();
-   $time = strtotime($comment['time']);
-   $ago = $now - $time;
-   // Tính toán các đơn vị thời gian từ số giây
-   $days = floor($ago / (60 * 60 * 24)); // Số ngày
-   $hours = floor(($ago % (60 * 60 * 24)) / (60 * 60)); // Số giờ
-   $minutes = floor(($ago % (60 * 60)) / 60); // Số phút
-   $remainingSeconds = $ago % 60; // Số giây
-   ?>
-        <div class="post-info-1 mt-4">
-          <img src="../img/<?=$comment['avatar']?>" alt="" width="30px" class="user-avatar ">
-          <?=$comment['name_user']?>
-          <div class="post-reaction">
-     
-                <div class="post-cmt">
-                    <i class="fa-regular fa-comment mt-2"></i>
-                    
-                    <span><?=$comment['content_cmt']?></span>
-                </div> 
-                <p class="post-time"><?php
-                              if($days >0){
-                                echo $days." ngày trước";
-                              }
-                              elseif($hours>0){
-                                echo $hours." giờ trước";
-                              }
-                              elseif($minutes > 0){
-                                echo $minutes." phút trước";
-                              }
-                              else{
-                                echo $remainingSeconds." giây trước";
-                              }
-                              ?></p>
-          </div>
-          <?php } } ?>
-  
- </div>
-<?php
-if(isset($_SESSION['user'])){
-  $id_sp = $_GET['id_sp'];
-  $id_dm = $_GET['id_dm'];
-  
-?>
-
-      <form method="POST" action="?act=comment&id_sp=<?=$id_sp?>&id_dm=<?=$id_dm?>">
-        <div class="form-group">
-          <label for="comment">Nhận xét:</label>
-          <input type="hidden" name="id_sp" value="<?=$_GET['id_sp']?>">
-          <input type="hidden" name="id_user" value="<?=$_SESSION['user']['id_user']?>">
-          <textarea class="form-control" rows="5" id="comment" name="cmt"></textarea>
-        </div>
-        <button type="submit" name="comment" class="btn btn-primary">Gửi nhận xét</button>
-      </form>
-    </div>
-  </div>
-  <?php } ?>
-    </section>
 <script>
-
-
-function expandDescription() {
-    var description = document.getElementById("detailDescription");
-    var toggleLink = document.getElementById("toggleDescription");
-
-    if (description.style.maxHeight === "300px") {
-        description.style.maxHeight = "none";
-        toggleLink.textContent = "Thu gọn";
-    } else {
-        description.style.maxHeight = "300px";
-        toggleLink.textContent = "Xem thêm";
-    }
-}
-// Lấy danh sách tất cả các size-option
-const sizeOptions = document.querySelectorAll('.size-option');
-
-// Duyệt qua từng size-option và thêm sự kiện click
-sizeOptions.forEach(sizeOption => {
-    sizeOption.addEventListener('click', function() {
-        // Lấy giá trị của size từ data-value
-        const size = this.dataset.value;
-        
-        // Đặt giá trị cho input ẩn
-        document.getElementById('selectedSize').value = size;
-        
-        // Xóa lớp active từ tất cả size-option
-        sizeOptions.forEach(option => {
-            option.classList.remove('active');
-        });
-        
-        // Thêm lớp active cho size-option được chọn
+// Size selection
+document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
+        document.getElementById('selectedSize').value = this.dataset.size;
     });
 });
 
+// Toggle description
+function toggleDescription() {
+    const desc = document.getElementById("detailDescription");
+    const btn = document.getElementById("toggleDescriptionBtn");
+    if (desc.style.maxHeight === "none") {
+        desc.style.maxHeight = "250px";
+        btn.innerHTML = 'Xem thêm <i class="fa-solid fa-chevron-down ms-1"></i>';
+    } else {
+        desc.style.maxHeight = "none";
+        btn.innerHTML = 'Thu gọn <i class="fa-solid fa-chevron-up ms-1"></i>';
+    }
+}
 </script>

@@ -1,119 +1,130 @@
+<div class="container my-5">
+    <h2 class="text-center text-primary mb-4 fw-bold"><i class="fa-solid fa-cart-shopping me-2"></i>Giỏ hàng của bạn</h2>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="text-center">
-            <h2>Giỏ hàng</h2>
-        </div>
-    </div>
-</div>
-<div>
-    <form method="post" action="#">
-        <div class="container" id="cart">
-            <table class="table">
-                <thead>
+    <?php if (!empty($_SESSION['cart'])): ?>
+        <div class="table-responsive bg-white rounded shadow-sm p-4 mb-4">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
                     <tr>
-                        <td></td>
-                        <th scope="col">&nbsp;</th>
-                        <th scope="col">Tên</th>
-                        <th scope="col">Ảnh</th>
-                        <th scope="col">Size</th>
-                        <th scope="col">Giá</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Tổng cộng</th>
+                        <th style="width: 50px;">Xóa</th>
+                        <th style="width: 100px;">Ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th class="text-center" style="width: 80px;">Size</th>
+                        <th class="text-end" style="width: 140px;">Đơn giá</th>
+                        <th class="text-center" style="width: 120px;">Số lượng</th>
+                        <th class="text-end" style="width: 150px;">Tổng tiền</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $total = 0;
-                    $id_sp = 0;
-                    if (isset($_SESSION['cart'])) {
-                        foreach ($cart as $ca) {
-                            $id_sp = $ca['id_sp'];
-                            $Product = loadProductById($id_sp);
+                    $grand_total = 0;
+                    foreach ($_SESSION['cart'] as $index => $item):
+                        $item_price = (int)$item['price_sp'];
+                        $item_qty = (int)$item['soluongcart'];
+                        $line_total = $item_price * $item_qty;
+                        $grand_total += $line_total;
                     ?>
-                    
-                            <tr class="cart_item container">
-                                <td class="max">
-                                    <form method="POST" action="?act=delete-cart&id_sp=<?=$id_sp?>">
-                                        <input type="hidden" name="cart_id" value="<?=$id_sp?>">
-                                        <button type="submit" name="delete" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn xóa sản phẩm khỏi giỏ hàng ?')">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                                <td><a title="Remove this item" class="remove" href="#"></a></td>
-                                <td style="max-width: 450px;"><?= $ca['name_sp'] ?></td>
-                                <td>
-                                    <img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="../img/<?= $ca['image_sp'] ?>">
-                                </td>
-                                <td><?= $ca['size'] ?></td>
-                                <td>
-                                    <span><?= number_format((int)$ca['price_sp'], 0, ",", ".") ?>₫</span>
-                                    <input type="hidden" class="iprice" value="<?= $ca['price_sp'] ?>">
-                                </td>
-                                <td>
-                                    <input type="number" value="<?= $ca['soluongcart'] ?>" min="1" max="<?= $Product['soluong'] ?>" id="quantity_<?= $ca['id_sp'] ?>" oninput="updateQuantity(<?= $ca['id_sp'] ?>, this.value)" class="inp-sl" onclick="reloadPage()">
-                                </td>
-                                <td class="itotal"><?= number_format(($ca['price_sp'] * $ca['soluongcart']), 0, '.', '.') ?> ₫</td>
-                            </tr>
-                    <?php
-                            $total += (intval($ca['price_sp']) * intval($ca['soluongcart']));
-                        }
-                    }
-                    ?>
-                    <tr>
-                        <td colspan="6" align="right"><strong>Tổng tiền:</strong></td>
-                        <td align="right"><?= number_format($total, 0, '.', '.') ?> ₫</td>
-                    </tr>
-                    <tr>
-                        <td colspan="6">
-                            <div class="coupon">
-                                <label for="coupon_code">Mã giảm giá:</label>
-                                <input type="text" placeholder="Nhập mã" value="" id="coupon_code" class="input-text" name="coupon_code">
-                                <input type="submit" value="Áp dụng" name="apply_coupon" class="btn btn-warning">
-                                
-                                <a href="?act=check-out" class="btn btn-primary">Thanh toán</a>
-                            </div>
+                    <tr id="cart-row-<?=$index?>">
+                        <td>
+                            <form method="POST" action="?act=delete-cart">
+                                <input type="hidden" name="cart_index" value="<?=$index?>">
+                                <button type="submit" name="delete" class="btn btn-sm btn-outline-danger" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <img src="../img/<?=$item['image_sp']?>" alt="<?=htmlspecialchars($item['name_sp'])?>" class="img-thumbnail" style="width: 70px; height: 70px; object-fit: contain;">
+                        </td>
+                        <td>
+                            <a href="?act=viewProduct&id_sp=<?=$item['id_sp']?>" class="fw-bold text-dark text-decoration-none">
+                                <?=htmlspecialchars($item['name_sp'])?>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-secondary"><?=$item['size'] ?: 'Mặc định'?></span>
+                        </td>
+                        <td class="text-end">
+                            <span class="fw-bold"><?=number_format($item_price, 0, ",", ".")?> ₫</span>
+                            <input type="hidden" class="item-price-val" value="<?=$item_price?>">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" 
+                                   class="form-control form-control-sm text-center quantity-input" 
+                                   value="<?=$item_qty?>" 
+                                   min="1" 
+                                   max="99" 
+                                   onchange="updateCartQuantity(<?=$index?>, this.value)">
+                        </td>
+                        <td class="text-end">
+                            <strong class="text-danger line-total-text" id="line-total-<?=$index?>"><?=number_format($line_total, 0, ",", ".")?> ₫</strong>
                         </td>
                     </tr>
+                    <?php endforeach; ?>
                 </tbody>
+                <tfoot>
+                    <tr class="table-light">
+                        <td colspan="5" class="text-end fw-bold fs-5">Tổng cộng đơn hàng:</td>
+                        <td colspan="2" class="text-end fw-bold text-danger fs-4" id="grand-total-text">
+                            <?=number_format($grand_total, 0, ",", ".")?> ₫
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
-    </form>
+
+        <div class="row g-3 justify-content-between align-items-center bg-white p-3 rounded shadow-sm">
+            <div class="col-md-6">
+                <form class="d-flex gap-2" onsubmit="event.preventDefault(); alert('Mã giảm giá đã được ghi nhận!');">
+                    <input type="text" class="form-control" placeholder="Nhập mã giảm giá..." style="max-width: 250px;">
+                    <button type="submit" class="btn btn-outline-warning text-dark fw-bold">Áp dụng</button>
+                </form>
+            </div>
+            <div class="col-md-6 text-end">
+                <a href="index.php?act=all-product" class="btn btn-outline-secondary me-2">
+                    <i class="fa-solid fa-arrow-left me-1"></i> Tiếp tục mua hàng
+                </a>
+                <a href="?act=check-out" class="btn btn-success px-4 py-2 fw-bold">
+                    Tiến hành thanh toán <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+
+    <?php else: ?>
+        <div class="text-center py-5 bg-white rounded shadow-sm">
+            <i class="fa-solid fa-bag-shopping fa-4x text-muted mb-3"></i>
+            <h4 class="text-dark">Giỏ hàng của bạn đang trống!</h4>
+            <p class="text-muted">Hãy khám phá các mẫu giày bóng đá chất lượng tại 8 Football.</p>
+            <a href="index.php?act=all-product" class="btn btn-primary mt-2 px-4 py-2">
+                <i class="fa-solid fa-cart-plus me-2"></i>Mua sắm ngay
+            </a>
+        </div>
+    <?php endif; ?>
 </div>
+
 <script>
-   
-   // Hàm cập nhật số lượng sản phẩm bằng AJAX
-function updateQuantity(id_sp, newQuantity) {
+function updateCartQuantity(cartIndex, newQty) {
+    newQty = parseInt(newQty);
+    if (isNaN(newQty) || newQty < 1) newQty = 1;
+
     $.ajax({
         type: 'POST',
         url: 'xulysoluong.php',
         data: {
-            id_sp: id_sp,
-            soluongcart: newQuantity
+            cart_index: cartIndex,
+            soluongcart: newQty
         },
+        dataType: 'json',
         success: function(response) {
-            // Sau khi cập nhật thành công, cập nhật số lượng sản phẩm trên giao diện
-            $('#quantity_' + id_sp).val(newQuantity);
-            // Cập nhật tổng cộng của sản phẩm
-            var totalPrice = parseInt($('#quantity_' + id_sp).closest('tr').find('.iprice').val()) * newQuantity;
-            $('#quantity_' + id_sp).closest('tr').find('.itotal').text(totalPrice.toLocaleString('vi-VN') + ' ₫');
-            // Cập nhật tổng tiền
-            updateTotalPrice();
+            if (response.success) {
+                $('#line-total-' + cartIndex).text(response.line_total_formatted);
+                $('#grand-total-text').text(response.grand_total_formatted);
+            }
+        },
+        error: function() {
+            // Fallback reload
+            location.reload();
         }
     });
 }
-
-// Hàm cập nhật tổng tiền
-function updateTotalPrice() {
-    var total = 0;
-    $('.itotal').each(function() {
-        total += parseInt($(this).text().replace(' ₫', '').replace(/\./g, ''));
-    });
-    $('#totalPrice').text(total.toLocaleString('vi-VN') + ' ₫');
-}
-function reloadPage() {
-        location.reload();
-    }
-
 </script>

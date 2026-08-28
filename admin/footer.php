@@ -1,24 +1,47 @@
-<!-- <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> -->
-<!-- <script src="path/to/quill.min.js"></script> -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>  
-<script src="path/to/quill.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-</script>
+        </div> <!-- End dash-content -->
+    </section> <!-- End dashboard -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-</script>
-<script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
-<script src="./js/index.js"></script>
-<script src="./js/validate.js"></script>
-<script src="./js/dark.js"></script>
-</body>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const body = document.querySelector("body"),
+              modeToggle = body.querySelector(".mode-toggle"),
+              sidebar = body.querySelector("nav"),
+              sidebarToggle = body.querySelector(".sidebar-toggle");
 
+        let getMode = localStorage.getItem("mode");
+        if(getMode && getMode === "dark") {
+            body.classList.add("dark");
+        }
 
-</html>
-<script>
-    ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-    console.error(error);
+        let getStatus = localStorage.getItem("status");
+        if(getStatus && getStatus === "close") {
+            sidebar.classList.add("close");
+        }
+
+        if (modeToggle) {
+            modeToggle.addEventListener("click", () => {
+                body.classList.toggle("dark");
+                if(body.classList.contains("dark")) {
+                    localStorage.setItem("mode", "dark");
+                } else {
+                    localStorage.setItem("mode", "light");
+                }
+            });
+        }
+
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener("click", () => {
+                sidebar.classList.toggle("close");
+                if(sidebar.classList.contains("close")) {
+                    localStorage.setItem("status", "close");
+                } else {
+                    localStorage.setItem("status", "open");
+                }
+            });
+        }
     });
-</script>
+    </script>
+</body>
+</html>
